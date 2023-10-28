@@ -4,6 +4,8 @@ const Typingbox = () => {
   const [timer, setTimer] = useState(15);
   const [wordCount, setWordCount] = useState(50); // Initialize word count to 50
   const [isTimerRunning, setIsTimerRunning] = useState(false);
+  // const [newword, setNewWord] = useState("");
+  // const [key, setKey] = useState(0);
   let para =
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in dolor sed justo laoreet venenatis. Cras ut facilisis turpis. Vivamus in fermentum quam, sed malesuada nunc. Aliquam eu erat non libero sollicitudin semper. Nulla at aliquet justo. Aenean ac nunc id quam vestibulum dignissim. In hac habitasse platea dictumst. Vestibulum volutpat, ex sit amet vestibulum dignissim, arcu justo tincidunt nisi, eu vestibulum sapien risus ut lorem. Sed eget purus sit amet neque dapibus vestibulum. Praesent a diam arcu. Vestibulum interdum leo nec massa vehicula, at elementum ligula volutpat. Sed a volutpat felis. Suspendisse in hendrerit lectus. Curabitur convallis eget ante a fermentum";
 
@@ -27,6 +29,7 @@ const Typingbox = () => {
           window.alert("Times up!");
           setIsTimerRunning(false);
           clearInterval(intervalId);
+          setTimer(15);
         }
       }, 1000);
     } else {
@@ -44,13 +47,26 @@ const Typingbox = () => {
     setTimer(seconds);
     setIsTimerRunning(true);
   };
-  
+
   const handleKeyDown = () => {
     // Start the timer when a key is pressed
     if (!isTimerRunning) {
       startTimer(timer); // Adjust the initial time as needed
     }
   };
+
+  //check wether user type correct character or not...
+  // function handleTyping(e) {
+  //   let value = e.target.value;
+  //   // console.log(newword);
+  //   // setNewWord(value);
+  //   console.log(para.charAt(key));
+  //   if (value[value.length - 1] === para[key]) {
+  //     setKey(key + 1);
+  //   } else {
+  //     //Handle the Incorrect typing here...
+  //   }
+  // }
 
   return (
     <div>
@@ -62,7 +78,13 @@ const Typingbox = () => {
           <button onClick={() => startTimer(60)}>60sec</button>
         </div>
       </div>
-      <div className="typingbox" onKeyDown={handleKeyDown} tabIndex={0}>
+      <div
+        className="typingbox"
+        tabIndex={0}
+        onKeyDown={handleKeyDown}
+        // onKeyDown={handleTyping}
+        // contentEditable="true"
+      >
         {/* {para.split("").map((char) => (
           <span key={`char` + keychar++}>{char}</span>
         ))} */}
@@ -70,6 +92,7 @@ const Typingbox = () => {
           <span key={`word` + keychar++}>{word} </span>
         ))}
       </div>
+
       <div className="wordChangeSection">
         <div className="btn1">
           <button onClick={() => updateWordCount(10)}>10</button>

@@ -7,26 +7,34 @@ import Footer from "./components/Footer";
 
 import "./App.css";
 import "./fonts.css";
+import { isVisible } from "@testing-library/user-event/dist/utils";
 
 function App() {
-  const [showLoginPage, setShowLoginPage] = useState(false);
-  const [showSignupPage, setShowSignupPage] = useState(false);
+  const [isLoginSignupVisible, setIsLoginSignupVisible] = useState(false);
 
-  const handleIconClick = () => {
-    setShowLoginPage(true);
-    setShowSignupPage(true);
+  const handleIconClick = (isVisible) => {
+    setIsLoginSignupVisible(isVisible);
+  };
+
+  const [isSigupVisible, setIsSignUpVisible] = useState(false);
+
+  const handleSignupPageVisibility = (isVisible) => {
+    setIsSignUpVisible(isVisible);
   };
   return (
     <div className="App">
-      <Navbar onUserIconClick={handleIconClick} />
-      {showLoginPage && (
-        <div className="login-overlay">
+      <Navbar
+        onUserIconClick={handleIconClick}
+        isLoginSignupVisible={isLoginSignupVisible}
+      />
+
+      {isLoginSignupVisible && (
+        <div className="login-signup">
           <Login />
-        </div>
-      )}
-      {showSignupPage && (
-        <div className="login-overlay">
-          <Signup />
+          <Signup
+            onSignUpClick={handleSignupPageVisibility}
+            isSigupVisible={isSigupVisible}
+          />
         </div>
       )}
 

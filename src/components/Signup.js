@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const Signup = () => {
+const Signup = ({ onSignUpClick, isSigupVisible }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -27,7 +27,7 @@ const Signup = () => {
 
   return (
     <div className="signup-component">
-      <h2>Sign Up</h2>
+      <h2 onClick={() => onSignUpClick(!isSigupVisible)}>Sign Up</h2>
       <form onSubmit={handleSignup}>
         <div className="form-group">
           <label htmlFor="email">Email</label>
